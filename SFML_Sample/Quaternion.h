@@ -11,7 +11,7 @@
 namespace sfml_game
 {
 
-	class Quaternion
+	class Quaternion // Incomplete
 	{
 	public:
 		Quaternion(const glm::vec4 & quaternion = glm::vec4())
