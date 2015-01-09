@@ -45,7 +45,7 @@ protected:	// Protected member functions
 		using namespace glm;
 
 		// Initialize GLEW
-		glewExperimental=true; // Needed in core profile
+		glewExperimental = GL_TRUE; // Needed in core profile
 		if (glewInit() != GLEW_OK) 
 			std::cerr << "Failed to initialize GLEW\n" << std::endl;			
 
