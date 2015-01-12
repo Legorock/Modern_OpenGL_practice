@@ -83,7 +83,7 @@ namespace sfml_game
 				static Time _t;
 				sf::Time _deltaTime = _t.getDeltaTime();
 
-				processEvents();
+				//processEvents();
 				 
 				_timeSinceLastUpdate += _deltaTime;
 				while(_timeSinceLastUpdate > _TimePerFrame)
@@ -97,6 +97,8 @@ namespace sfml_game
 				render();
 
 				m_window.display();
+
+				processEvents();
 			} // Mainloop(running)
 
 			// sleep 100 ms when this game_state paused
