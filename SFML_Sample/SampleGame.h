@@ -36,7 +36,14 @@ class SampleGame : public sfml_game::SFMLGame
 	typedef sfml_game::rendering_sys::Camera CameraObject;
 
 public:
-	SampleGame() : SFMLGame("OpenGL Practice", 1800, 920, sf::Style::Default, sf::ContextSettings(32,0,0,3,0)) {}
+	SampleGame() : SFMLGame("OpenGL Practice", 1024, 720, sf::Style::Default, sf::ContextSettings(32,0,0,3,0)) 
+	{
+		std::cout << "WELCOME!" << std::endl;
+		std::cout << "To toggle light fade in/out press F" << std::endl;
+		std::cout << "To toggle light colour change press C" << std::endl;
+		std::cout << "To toggle light rotation press L" << std::endl;
+		std::cout << "To toggle model object rotation press O" << std::endl;
+	}
 	virtual ~SampleGame() {}
 
 protected:	// Protected member functions
@@ -102,8 +109,8 @@ protected:	// Protected member functions
 		_trans.GetRotation().x += glm::radians(m_objectRotCounter);
 
 		// Light Fade In/Out
-		float sinCounter = sinf(m_lightFadeCounter);
-		_light.setIntensity(sinCounter * sinCounter);
+		float cosCounter = cosf(m_lightFadeCounter);
+		_light.setIntensity(cosCounter * cosCounter);
 		//_light.setIntensity(1.0f);
 
 		// Light Direction Rotation
