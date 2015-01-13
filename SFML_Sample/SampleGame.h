@@ -18,15 +18,6 @@
 //using namespace glm;
 
 #include "SFMLGame.h"
-#include "RenderUtil.h"
-#include "Vertex.h"
-#include "Mesh.h"
-#include "Shader.h"
-#include "Texture.h"
-#include "Transform.h"
-#include "Camera.h"
-#include "Quaternion.h"
-#include "custom_typedef.h"
 
 class SampleGame : public sfml_game::SFMLGame
 {
@@ -43,20 +34,9 @@ public:
 		std::cout << "To toggle light colour change press C" << std::endl;
 		std::cout << "To toggle light rotation press L" << std::endl;
 		std::cout << "To toggle model object rotation press O" << std::endl;
-	}
-	virtual ~SampleGame() {}
+		std::cout << "To toggle triplanar shader press S" << std::endl;
 
-protected:	// Protected member functions
-	void init() override 
-	{
 		using namespace glm;
-
-		// Initialize GLEW
-		glewExperimental = GL_TRUE; // Needed in core profile
-		if (glewInit() != GLEW_OK) 
-			std::cerr << "Failed to initialize GLEW\n" << std::endl;			
-
-		sfml_game::utils::initGraphics();
 		sfml_game::rendering_sys::Vertex v[] =
 		{
 			{vec3(-0.5, -0.5, 0), vec2(0.0, 0.0), vec3(0.0, 0.0, -1.0)},
@@ -69,10 +49,27 @@ protected:	// Protected member functions
 		m_mesh = new MeshObject(v, sizeof(v)/sizeof(v[0]), indices, sizeof(indices)/sizeof(indices[0]));
 		m_monkeyModel = new MeshObject("./res/models/monkey3.obj");
 		m_shader = new ShaderObject("./res/shaders/basicShader");
+		m_triplanarShader = new ShaderObject("./res/shaders/triplanarShader");
 		m_texture = new TextureObject("./res/textures/bricks.jpg");
 
 		float _aspectRatio = (float)m_window.getSize().x / (float)m_window.getSize().y;
 		m_camera = new CameraObject(glm::vec3(0.0f, 0.0f, -4.0f), 70.0f, _aspectRatio, 0.01f, 100.0f);
+
+	}
+	virtual ~SampleGame() 
+	{
+		delete m_mesh; 
+		delete m_monkeyModel;
+		delete m_shader; 
+		delete m_triplanarShader;
+		delete m_texture; 
+		delete m_camera;	
+	}
+
+protected:	// Protected member functions
+	void init() override 
+	{
+		using namespace glm;
 
 		m_counter = 0.0f;
 		m_lightFadeCounter = 0.0f;
@@ -84,15 +81,10 @@ protected:	// Protected member functions
 		m_lightRotToggle = false;
 		m_objectRotToggle = false;
 		m_lightColourToggle = false;
+		m_triplanarToggle = true;
 	}
 	void dispose() override 
-	{
-		delete m_mesh; 
-		delete m_monkeyModel;
-		delete m_shader; 
-		delete m_texture; 
-		delete m_camera;
-	}
+	{}
 	void render() override 
 	{
 		sfml_game::Transform _trans;
@@ -123,11 +115,19 @@ protected:	// Protected member functions
 		glm::vec4 colourRotate = lightColMat * glm::vec4(_light.getColour(), 1.0f);
 		_light.setColour(glm::vec3(colourRotate.x, colourRotate.y, colourRotate.z));
 
-		sfml_game::utils::clearScreen();
-
-		m_shader->Bind();
 		m_texture->Bind();
-		m_shader->Update(_trans, (*m_camera), _light);
+
+		if(m_triplanarToggle)
+		{
+			m_triplanarShader->Bind();
+			m_triplanarShader->Update(_trans, (*m_camera), _light);
+		}
+		else
+		{
+			m_shader->Bind();
+			m_shader->Update(_trans, (*m_camera), _light);
+		}
+
 		m_monkeyModel->Draw();
 		//m_mesh->Draw();
 	}
@@ -155,6 +155,11 @@ protected:	// Protected member functions
 			m_lightColourToggle = !m_lightColourToggle;
 			std::cout << "Light Colour Toggle: " << (m_lightColourToggle ? "True" : "False") << std::endl;
 		}
+		if(m_input.getKeyDown(sf::Keyboard::S))
+		{
+			m_triplanarToggle = !m_triplanarToggle;
+			std::cout << "Triplanar Shader Toggle: " << (m_triplanarToggle ? "True" : "False") << std::endl;
+		}
 
 		if(m_lightFadeToggle) m_lightFadeCounter += seconds;
 		if(m_lightRotToggle) m_lightRotCounter += seconds * 20;
@@ -168,6 +173,7 @@ private:	// Private member variables
 	MeshObject * m_mesh;
 	MeshObject * m_monkeyModel;
 	ShaderObject * m_shader;
+	ShaderObject * m_triplanarShader;
 	TextureObject * m_texture;
 	CameraObject * m_camera;
 
@@ -181,5 +187,6 @@ private:	// Private member variables
 	bool m_lightRotToggle;
 	bool m_lightColourToggle;
 	bool m_objectRotToggle;
+	bool m_triplanarToggle;
 };
 

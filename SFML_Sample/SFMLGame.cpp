@@ -1,8 +1,4 @@
-#include <iostream>
-#include <SFML\OpenGL.hpp>
-#include <SFML\System.hpp>
 #include "SFMLGame.h"
-#include "Time.h"
 
 namespace sfml_game
 {
@@ -11,6 +7,7 @@ namespace sfml_game
 	{
 		m_window.setFramerateLimit(0);
 		m_state = game_state::Stopped;
+		utils::initGraphics();
 	}
 
 	SFMLGame::SFMLGame(std::string title, uint32 height, uint32 width, uint32 style = sf::Style::Default, sf::ContextSettings& contextSettings = sf::ContextSettings(32,0,0,3,0))
@@ -18,6 +15,7 @@ namespace sfml_game
 	{
 		m_window.setFramerateLimit(0);
 		m_state = game_state::Stopped;
+		utils::initGraphics();
 	}
 	 
 	SFMLGame::~SFMLGame(void) {}
@@ -97,6 +95,8 @@ namespace sfml_game
 				render();
 
 				m_window.display();
+
+				sfml_game::utils::clearScreen();
 
 				processEvents();
 			} // Mainloop(running)

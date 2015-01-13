@@ -1,5 +1,7 @@
 #include "SampleGame.h"
 
+#include <iostream>
+
 int main()
 {
 	SampleGame game;

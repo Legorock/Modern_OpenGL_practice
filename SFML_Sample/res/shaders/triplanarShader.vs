@@ -15,6 +15,7 @@ out vec2 texCoord0;
 out vec3 normal0;
 out vec3 position0;
 out Light light0;
+out vec3 triplanarNormal0;
 
 uniform mat4 transform;
 
@@ -30,4 +31,5 @@ void main()
 	light0.intensity = light.intensity;
 	normal0 = (transform * vec4(normal, 0.0)).xyz;
 	position0 = position;
+	triplanarNormal0 = normal;
 }

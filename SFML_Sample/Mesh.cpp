@@ -1,7 +1,7 @@
 #include "Mesh.h"
 
-#include "obj_loader.h"
-#include <vector>
+//#include "obj_loader.h"
+//#include <vector>
 
 namespace sfml_game
 {

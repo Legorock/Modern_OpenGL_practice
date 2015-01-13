@@ -77,7 +77,7 @@ namespace sfml_game
 		glm::vec4 m_q;
 	};
 
-	Quaternion operator*(Quaternion lhs, const Quaternion& rhs)
+	inline Quaternion operator*(Quaternion lhs, const Quaternion& rhs)
 	{
 		return lhs *= rhs;
 	}

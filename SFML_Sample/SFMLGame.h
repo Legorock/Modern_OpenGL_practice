@@ -1,7 +1,24 @@
 #pragma once
+#include <iostream>
 #include <string>
+
+// Include GLEW. Always include it before gl.h and glfw.h, since it's a bit magic.
+#include <GL/glew.h>
+
+#include <SFML\OpenGL.hpp>
+#include <SFML\System.hpp>
 #include <SFML\Window.hpp>
+
+#include "RenderUtil.h"
 #include "Input.h"
+#include "Time.h"
+#include "Vertex.h"
+#include "Mesh.h"
+#include "Shader.h"
+#include "Texture.h"
+#include "Transform.h"
+#include "Camera.h"
+//#include "Quaternion.h"
 #include "custom_typedef.h"
 
 namespace sfml_game
