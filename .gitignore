@@ -163,5 +163,4 @@ $RECYCLE.BIN/
 !x64/
 x64/*
 !x64/Release/
-!x64/Release/**
-!x64/Release/models/*
+!x64/Release/res/models/*
