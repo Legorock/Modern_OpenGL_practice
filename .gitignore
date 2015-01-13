@@ -160,4 +160,4 @@ $RECYCLE.BIN/
 !*/res/models/*
 
 ## Unignore Release Folder
-!*/Release/
+!x64/Release/**
