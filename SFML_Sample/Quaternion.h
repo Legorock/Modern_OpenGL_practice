@@ -10,7 +10,6 @@
 
 namespace sfml_game
 {
-
 	class Quaternion // Incomplete (A lot TODO)
 	{
 	public:
