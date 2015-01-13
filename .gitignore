@@ -158,3 +158,6 @@ $RECYCLE.BIN/
 
 ## Unignore Resource Folder
 !*/res/models/*
+
+## Unignore Release Folder
+!*/Release/**
