@@ -16,6 +16,8 @@ uniform sampler2D diffuse;
 
 void main()
 {		
-	gl_FragColor = texture(diffuse, texCoord0) * vec4(light0.colour,1.0)
+	float scale = 2;
+
+	gl_FragColor = texture(diffuse, texCoord0 * scale) * vec4(light0.colour,1.0)
 		* clamp(dot(-light0.direction, normal0) * light0.intensity, 0.0, 1.0);			
 }

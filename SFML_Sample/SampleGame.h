@@ -3,6 +3,7 @@
 // Include standard headers
 #include <chrono>
 #include <iostream>
+#include <memory>
 
 // Include GLEW. Always include it before gl.h and glfw.h, since it's a bit magic.
 #include <GL/glew.h>
@@ -46,25 +47,17 @@ public:
 
 		uint32 indices[] = 	{ 0, 1, 2 };
 
-		m_mesh = new MeshObject(v, sizeof(v)/sizeof(v[0]), indices, sizeof(indices)/sizeof(indices[0]));
-		m_monkeyModel = new MeshObject("./res/models/monkey3.obj");
-		m_shader = new ShaderObject("./res/shaders/basicShader");
-		m_triplanarShader = new ShaderObject("./res/shaders/triplanarShader");
-		m_texture = new TextureObject("./res/textures/bricks.jpg");
+		m_mesh = std::move(std::unique_ptr<MeshObject>(new MeshObject(v, sizeof(v)/sizeof(v[0]), indices, sizeof(indices)/sizeof(indices[0]))));
+		m_monkeyModel = std::move(std::unique_ptr<MeshObject>(new MeshObject("./res/models/monkey3.obj")));
+		m_shader = std::move(std::unique_ptr<ShaderObject>(new ShaderObject("./res/shaders/basicShader")));
+		m_triplanarShader = std::move(std::unique_ptr<ShaderObject>(new ShaderObject("./res/shaders/triplanarShader")));
+		m_texture = std::move(std::unique_ptr<TextureObject>(new TextureObject("./res/textures/bricks.jpg")));
 
 		float _aspectRatio = (float)m_window.getSize().x / (float)m_window.getSize().y;
-		m_camera = new CameraObject(glm::vec3(0.0f, 0.0f, -4.0f), 70.0f, _aspectRatio, 0.01f, 100.0f);
-
+		m_camera = std::move(std::unique_ptr<CameraObject>(new CameraObject(glm::vec3(0.0f, 0.0f, -4.0f), 70.0f, _aspectRatio, 0.01f, 100.0f)));
 	}
 	virtual ~SampleGame() 
-	{
-		delete m_mesh; 
-		delete m_monkeyModel;
-		delete m_shader; 
-		delete m_triplanarShader;
-		delete m_texture; 
-		delete m_camera;	
-	}
+	{}
 
 protected:	// Protected member functions
 	void init() override 
@@ -170,12 +163,12 @@ protected:	// Protected member functions
 	}
 
 private:	// Private member variables
-	MeshObject * m_mesh;
-	MeshObject * m_monkeyModel;
-	ShaderObject * m_shader;
-	ShaderObject * m_triplanarShader;
-	TextureObject * m_texture;
-	CameraObject * m_camera;
+	std::unique_ptr<MeshObject> m_mesh;
+	std::unique_ptr<MeshObject> m_monkeyModel;
+	std::unique_ptr<ShaderObject> m_shader;
+	std::unique_ptr<ShaderObject> m_triplanarShader;
+	std::unique_ptr<TextureObject> m_texture;
+	std::unique_ptr<CameraObject> m_camera;
 
 	float m_counter;
 	float m_lightFadeCounter;

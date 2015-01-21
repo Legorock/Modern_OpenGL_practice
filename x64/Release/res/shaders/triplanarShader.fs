@@ -37,9 +37,6 @@ vec4 getTriPlanarBlend(sampler2D diffuse, vec3 coord, vec3 normal)
 
 void main()
 {		
-	//gl_FragColor = texture(diffuse, texCoord0) * vec4(light0.colour,1.0)
-		//* clamp(dot(-light0.direction, normal0) * light0.intensity, 0.0, 1.0);	
-
 	gl_FragColor = getTriPlanarBlend(diffuse, position0, triplanarNormal0) * vec4(light0.colour,1.0)
 		* clamp(dot(-light0.direction, normal0) * light0.intensity, 0.0, 1.0);			
 }
