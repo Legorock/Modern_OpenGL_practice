@@ -12,6 +12,7 @@ in vec3 normal0;
 in vec3 position0;
 in Light light0;
 in vec3 triplanarNormal0;
+in vec3 viewPos;
 
 uniform sampler2D diffuse;
 

@@ -30,6 +30,7 @@ namespace sfml_game
 			m_uniforms[LIGHTDIR_U] = glGetUniformLocation(m_program, "light.direction");
 			m_uniforms[LIGHTCOLOUR_U] = glGetUniformLocation(m_program, "light.colour");
 			m_uniforms[LIGHTINTENSITY_U] = glGetUniformLocation(m_program, "light.intensity");
+			m_uniforms[VIEWPOS_U] = glGetUniformLocation(m_program, "viewPos");
 		}
 
 
@@ -53,8 +54,10 @@ namespace sfml_game
 		void Shader::Update(const Transform & transform, const Camera & camera,  const Light & light)
 		{
 			glm::mat4 model = camera.GetViewProjection() * transform.GetModel();
+			glm::vec3 view = camera.GetPosition();
 
 			glUniformMatrix4fv(m_uniforms[TRANSFORM_U], 1, GL_FALSE, &model[0][0]);
+			glUniform3fv(m_uniforms[VIEWPOS_U], 1, &view.x);
 
 			UpdateLight(light);
 		}

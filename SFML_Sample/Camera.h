@@ -29,6 +29,8 @@ namespace sfml_game
 
 
 			inline glm::vec3&  GetPosition() { return m_position; }
+
+			inline glm::vec3 GetPosition() const { return m_position; }
 			
 			inline void SetPosition(const glm::vec3 & pos) { m_position = pos; } 
 

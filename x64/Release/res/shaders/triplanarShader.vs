@@ -16,8 +16,10 @@ out vec3 normal0;
 out vec3 position0;
 out Light light0;
 out vec3 triplanarNormal0;
+out vec3 viewPos;
 
 uniform mat4 transform;
+uniform vec3 viewPos;
 
 // light
 uniform Light light;

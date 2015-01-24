@@ -17,6 +17,7 @@ out vec3 position0;
 out Light light0;
 
 uniform mat4 transform;
+uniform vec3 viewPos;
 
 // light
 uniform Light light;
