@@ -1,4 +1,4 @@
-#version 150
+#version 330
 
 struct Light
 {
@@ -48,7 +48,7 @@ void main()
 	vec3 reflectionDirection = reflect(-light0.direction, normal0);
 	float specularPower = 32.0;
 	float specular = pow(max(dot(viewDirection, reflectionDirection), 0.0), specularPower);
-	vec4 specularComponent = specular * vec4(0.5); // fixed specular colour of (1.0)
+	vec4 specularComponent = specular * vec4(0.5) * light0.intensity; // fixed specular colour of (1.0)
 	
 	gl_FragColor = texComponent * (diffuseComponent + specularComponent);
 		

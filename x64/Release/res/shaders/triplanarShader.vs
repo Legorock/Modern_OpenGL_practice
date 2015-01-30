@@ -1,4 +1,4 @@
-#version 150
+#version 330
 
 struct Light
 {
@@ -16,7 +16,7 @@ out vec3 normal0;
 out vec3 position0;
 out Light light0;
 out vec3 triplanarNormal0;
-out vec3 viewPos;
+out vec3 viewPos0;
 
 uniform mat4 transform;
 uniform vec3 viewPos;
@@ -34,4 +34,5 @@ void main()
 	normal0 = (transform * vec4(normal, 0.0)).xyz;
 	position0 = position;
 	triplanarNormal0 = normal;
+	viewPos0 = viewPos;
 }

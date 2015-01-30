@@ -30,13 +30,6 @@ class SampleGame : public sfml_game::SFMLGame
 public:
 	SampleGame() : SFMLGame("OpenGL Practice", 1024, 720, sf::Style::Default, sf::ContextSettings(32,0,0,3,0)) 
 	{
-		std::cout << "WELCOME!" << std::endl;
-		std::cout << "To toggle light fade in/out press F" << std::endl;
-		std::cout << "To toggle light colour change press C" << std::endl;
-		std::cout << "To toggle light rotation press L" << std::endl;
-		std::cout << "To toggle model object rotation press O" << std::endl;
-		std::cout << "To toggle triplanar shader press S" << std::endl;
-
 		using namespace glm;
 		sfml_game::rendering_sys::Vertex v[] =
 		{
