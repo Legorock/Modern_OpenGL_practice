@@ -38,11 +38,13 @@ namespace sfml_game
 
 			enum 
 			{
-				TRANSFORM_U,
+				TRANSFORM_U,		// MVP (mat4)
 
 				LIGHTDIR_U,			// Light Direction (vec3)
 				LIGHTCOLOUR_U,		// Light Colour (vec3)
 				LIGHTINTENSITY_U,	// Light Intensity (float)
+
+				VIEWPOS_U,			// Camera View Position (vec3)
 
 				NUM_UNIFORMS
 			};

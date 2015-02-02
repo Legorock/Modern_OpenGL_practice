@@ -36,7 +36,9 @@ namespace sfml_game
 
 			// TODO: Depth clamp for later
 
-			glEnable(GL_FRAMEBUFFER_SRGB);
+
+			// Creates problems with nvidia drivers (like over-bright rendering)
+			//glEnable(GL_FRAMEBUFFER_SRGB); 
 		}
 
 	}
